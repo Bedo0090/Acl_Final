@@ -15,6 +15,7 @@ namespace StarterAssets
 		public bool aim;
 		public bool shoot;
 		public bool reload;
+		public bool switchWeapon;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -61,6 +62,10 @@ namespace StarterAssets
 			ReloadInput(value.isPressed);
 		}
 
+		public void OnSwitchWeapon(InputValue value)
+        {
+			SwitchWeaponInput(value.isPressed);
+        }
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
@@ -97,6 +102,11 @@ namespace StarterAssets
 		{
 			reload = newAimState;
 		}
+
+		public void SwitchWeaponInput(bool newSwitchWeaponState)
+        {
+			switchWeapon = newSwitchWeaponState;
+        }
 
 		private void OnApplicationFocus(bool hasFocus)
 		{

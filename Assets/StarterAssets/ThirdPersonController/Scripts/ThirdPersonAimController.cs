@@ -13,12 +13,21 @@ public class ThirdPersonAimController : MonoBehaviour
     public LayerMask aimCollideLayer = new LayerMask();
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
-    public Rig aimLayer;
+    public Rig aimLayerPistol;
+    public Rig aimLayerSG;
+    public GameObject pistolObject;
+    public GameObject shotgunObject;
+    private Rig aimLayer;
+    private RigBuilder rigBuilder;
+    private List<RigLayer> rigLayers;
 
     private void Start()
     {
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
+        rigBuilder = GetComponent<RigBuilder>();
+        rigLayers = rigBuilder.layers;
+        aimLayer = aimLayerPistol;
     }
 
     private void Update()
@@ -30,6 +39,36 @@ public class ThirdPersonAimController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimCollideLayer))
         {
             mouseWorldPos = raycastHit.point;
+        }
+
+        if (starterAssetsInputs.switchWeapon)
+        {
+            if (aimLayer == aimLayerPistol)
+            {
+                aimLayer = aimLayerSG;
+                pistolObject.SetActive(false);
+                shotgunObject.SetActive(true);
+                rigLayers[0].active = false;
+                rigLayers[1].active = false;
+                rigLayers[2].active = false;
+                rigLayers[3].active = true;
+                rigLayers[4].active = true;
+                rigLayers[5].active = true;
+            }
+            else
+            {
+                aimLayer = aimLayerPistol;
+                shotgunObject.SetActive(false);
+                pistolObject.SetActive(true);
+                rigLayers[0].active = true;
+                rigLayers[1].active = true;
+                rigLayers[2].active = true;
+                rigLayers[3].active = false;
+                rigLayers[4].active = false;
+                rigLayers[5].active = false;
+            }
+
+            starterAssetsInputs.switchWeapon = false;
         }
         if (starterAssetsInputs.aim)
         {
