@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
 
-public class PistolGun : MonoBehaviour
+public class ShotgunShoot : MonoBehaviour
 {
     public int damage;
     public float fireRate, range, reloadTime;
@@ -30,6 +30,7 @@ public class PistolGun : MonoBehaviour
     }
     private void MyInput()
     {
+        
         if (starterAssetsInputs.shoot && readyToShoot && !reloading && bulletsLeft > 0)
         {
             Shoot();
