@@ -111,6 +111,10 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        // Additions
+        Animator animator;
+        AnimatorStateInfo animatorinfo;
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -126,6 +130,7 @@ namespace StarterAssets
 
         private void Awake()
         {
+            animator = GetComponent<Animator>();
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -159,7 +164,9 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
-            Move();
+            animatorinfo = this.animator.GetCurrentAnimatorStateInfo(0);
+            if (!animatorinfo.IsName("ThrowGrenade"))
+                Move();
         }
 
         private void LateUpdate()
