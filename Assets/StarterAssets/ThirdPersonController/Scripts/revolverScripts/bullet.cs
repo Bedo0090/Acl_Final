@@ -5,9 +5,9 @@ public class GunSystem : MonoBehaviour
 {
     //Gun stats
     public int damage;
-    public float timeBetweenShooting, range, reloadTime, timeBetweenShots;
+    public float timeBetweenShooting, range, reloadTime;
     public int magazineSize , bulletsPerTap;
-    int bulletsLeft, bulletsShot;
+    int bulletsLeft;
 
     //bools 
     bool shooting, readyToShoot, reloading;
@@ -46,9 +46,7 @@ public class GunSystem : MonoBehaviour
 
         //Shoot
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0 )
-        {
-            bulletsShot = bulletsPerTap;
-           
+        {  
             Shoot();
             starterAssetsInputs.shoot = false;
         }
@@ -78,18 +76,16 @@ public class GunSystem : MonoBehaviour
         muzzleFlash.Emit(1);
 
         bulletsLeft--;
-        bulletsShot--;
 
         Debug.Log(bulletsLeft);
 
         Invoke("ResetShot", timeBetweenShooting);
 
-        if (bulletsShot > 0 && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);
     }
     private void ResetShot()
     {
         readyToShoot = true;
+        starterAssetsInputs.shoot = false;
     }
     private void Reload()
     {

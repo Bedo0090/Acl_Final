@@ -76,6 +76,7 @@ public class ShotgunShoot : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
+        starterAssetsInputs.shoot = false;
     }
     private void Reload()
     {

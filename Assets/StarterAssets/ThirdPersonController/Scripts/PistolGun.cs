@@ -75,6 +75,7 @@ public class PistolGun : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
+        starterAssetsInputs.shoot = false;
     }
     private void Reload()
     {
