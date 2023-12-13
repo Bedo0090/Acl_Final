@@ -1,10 +1,11 @@
 using UnityEngine;
+using StarterAssets;
 
 public class GunSystem : MonoBehaviour
 {
     //Gun stats
     public int damage;
-    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
+    public float timeBetweenShooting, range, reloadTime, timeBetweenShots;
     public int magazineSize , bulletsPerTap;
     public bool allowButtonHold;
     int bulletsLeft, bulletsShot;
@@ -13,13 +14,13 @@ public class GunSystem : MonoBehaviour
     bool shooting, readyToShoot, reloading;
 
     //Reference
-    public Camera fpsCam;
-    public Transform attackPoint;
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
+    public StarterAssetsInputs starterAssetsInputs;
 
     //Graphics
-    public GameObject muzzleFlash;
+    public ParticleSystem muzzleFlash;
+    public ParticleSystem hitEffect;
   
    
 
@@ -54,26 +55,22 @@ public class GunSystem : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
-
-       
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
-
-        //Calculate Direction with Spread
-        Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
-
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         //RayCast
-        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
+        if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
             Debug.Log(rayHit.collider.name);
-
-            
+            hitEffect.transform.position = rayHit.point;
+            hitEffect.transform.forward = rayHit.normal;
+            hitEffect.Emit(1);
         }
-       
-        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        muzzleFlash.Emit(1);
 
         bulletsLeft--;
         bulletsShot--;
+
+        Debug.Log(bulletsLeft);
 
         Invoke("ResetShot", timeBetweenShooting);
 
@@ -92,6 +89,8 @@ public class GunSystem : MonoBehaviour
     private void ReloadFinished()
     {
         bulletsLeft = magazineSize;
+        Debug.Log(bulletsLeft);
+        starterAssetsInputs.shoot = false;
         reloading = false;
     }
 }

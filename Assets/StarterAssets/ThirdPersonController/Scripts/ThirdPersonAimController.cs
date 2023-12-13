@@ -15,8 +15,10 @@ public class ThirdPersonAimController : MonoBehaviour
     private ThirdPersonController thirdPersonController;
     public Rig aimLayerPistol;
     public Rig aimLayerSG;
+    public Rig aimLayerRevolver;
     public GameObject pistolObject;
     public GameObject shotgunObject;
+    public GameObject revolverObject;
     public GameObject crossHairUI;
     private Rig aimLayer;
     private RigBuilder rigBuilder;
@@ -47,57 +49,105 @@ public class ThirdPersonAimController : MonoBehaviour
             mouseWorldPos = raycastHit.point;
         }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
-        {
-            for (int i = 0; i <= 3; i++)
-            {
-                rigLayers[i].active = false;
-            }
-            pistolObject.SetActive(false);
-        }
         // check what is equipped
-        else if (weaponEquipped.Equals("pistol"))
+        if (weaponEquipped.Equals("pistol"))
         {
-            for (int i = 0; i <= 3; i++)
+            //check if grenade animation is true
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
             {
-                rigLayers[i].active = true;
-            }
-            pistolObject.SetActive(true);
-        }
-
-        if (starterAssetsInputs.switchWeapon)
-        {
-            if (aimLayer == aimLayerPistol)
-            {
-                aimLayer = aimLayerSG;
-                pistolObject.SetActive(false);
-                shotgunObject.SetActive(true);
-                weaponEquipped = "shotgun";
-                for (int i = 0; i <= 5; i++)
+                for (int i = 0; i <= 2; i++)
                 {
-                    if (i <=2)
-                        rigLayers[i].active = false;
-                    else
-                        rigLayers[i].active = true;
+                    rigLayers[i].active = false;
                 }
+                pistolObject.SetActive(false);
             }
             else
             {
-                aimLayer = aimLayerPistol;
-                shotgunObject.SetActive(false);
-                pistolObject.SetActive(true);
-                weaponEquipped = "pistol";
-                for (int i = 0; i <= 5; i++)
+                for (int i = 0; i <= 2; i++)
                 {
-                    if (i <= 2)
-                        rigLayers[i].active = true;
-                    else
-                        rigLayers[i].active = false;
+                    rigLayers[i].active = true;
                 }
+                pistolObject.SetActive(true);
+                aimLayer = aimLayerPistol;
             }
+        }
+        else if (weaponEquipped.Equals("shotgun"))
+        {
+            //check if grenade animation is true
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
+            {
+                for (int i = 3; i <= 5; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                shotgunObject.SetActive(false);
+            }
+            else
+            {
+                for (int i = 3; i <= 5; i++)
+                {
+                    rigLayers[i].active = true;
+                }
+                shotgunObject.SetActive(true);
+                aimLayer = aimLayerSG;
+            }
+        }
+        else if (weaponEquipped.Equals("revolver"))
+        {
+            //check if grenade animation is true
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
+            {
+                for (int i = 6; i <= 8; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                revolverObject.SetActive(false);
+            }
+            else
+            {
+                for (int i = 6; i <= 8; i++)
+                {
+                    rigLayers[i].active = true;
+                }
+                revolverObject.SetActive(true);
+                aimLayer = aimLayerRevolver;
+            }
+        }
 
+        // switch over weapons for testing
+        if (starterAssetsInputs.switchWeapon)
+        {
+            if (weaponEquipped.Equals("pistol"))
+            {
+                pistolObject.SetActive(false);
+                for (int i = 0; i <= 2; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                weaponEquipped = "shotgun";
+            }
+            else if (weaponEquipped.Equals("shotgun"))
+            {
+                shotgunObject.SetActive(false);
+                for (int i = 3; i <= 5; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                weaponEquipped = "revolver";
+            }
+            else
+            {
+                revolverObject.SetActive(false);
+                for (int i = 6; i <= 8; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                weaponEquipped = "pistol";
+            }
             starterAssetsInputs.switchWeapon = false;
         }
+
+        // aim for any weapon
         if (starterAssetsInputs.aim)
         {
             crossHairUI.SetActive(true);
