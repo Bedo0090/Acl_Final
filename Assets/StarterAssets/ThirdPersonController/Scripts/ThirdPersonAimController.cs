@@ -117,6 +117,9 @@ public class ThirdPersonAimController : MonoBehaviour
         // switch over weapons for testing
         if (starterAssetsInputs.switchWeapon)
         {
+            starterAssetsInputs.shoot = false;
+            starterAssetsInputs.reload = false;
+
             if (weaponEquipped.Equals("pistol"))
             {
                 pistolObject.SetActive(false);

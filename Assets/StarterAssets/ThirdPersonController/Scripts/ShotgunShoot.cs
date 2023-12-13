@@ -17,6 +17,7 @@ public class ShotgunShoot : MonoBehaviour
     public LayerMask whatIsEnemy;
     public ParticleSystem muzzleFlash;
     public ParticleSystem hitEffect;
+    public ParticleSystem hitEffectBlood;
 
 
     private void Start()
@@ -53,9 +54,18 @@ public class ShotgunShoot : MonoBehaviour
         if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
             Debug.Log(rayHit.collider.name);
-            hitEffect.transform.position = rayHit.point;
-            hitEffect.transform.forward = rayHit.normal;
-            hitEffect.Emit(1);
+            if (rayHit.collider.CompareTag("Enemy"))
+            {
+                hitEffectBlood.transform.position = rayHit.point;
+                hitEffectBlood.transform.forward = rayHit.normal;
+                hitEffectBlood.Emit(1);
+            }
+            else
+            {
+                hitEffect.transform.position = rayHit.point;
+                hitEffect.transform.forward = rayHit.normal;
+                hitEffect.Emit(1);
+            }
         }
         muzzleFlash.Emit(1);
 

@@ -7,7 +7,6 @@ public class GunSystem : MonoBehaviour
     public int damage;
     public float timeBetweenShooting, range, reloadTime, timeBetweenShots;
     public int magazineSize , bulletsPerTap;
-    public bool allowButtonHold;
     int bulletsLeft, bulletsShot;
 
     //bools 
@@ -21,8 +20,9 @@ public class GunSystem : MonoBehaviour
     //Graphics
     public ParticleSystem muzzleFlash;
     public ParticleSystem hitEffect;
-  
-   
+    public ParticleSystem hitEffectBlood;
+
+
 
     private void Awake()
     {
@@ -36,13 +36,13 @@ public class GunSystem : MonoBehaviour
     }
     private void MyInput()
     {
-        if (allowButtonHold) 
-            shooting = Input.GetKey(KeyCode.Mouse0);
-        else 
-            shooting = Input.GetKeyDown(KeyCode.Mouse0) ;
-        
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) 
+        shooting = starterAssetsInputs.shoot;
+
+        if (starterAssetsInputs.reload && bulletsLeft < magazineSize && !reloading)
+        {
             Reload();
+            starterAssetsInputs.reload = false;
+        }
 
         //Shoot
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0 )
@@ -50,6 +50,7 @@ public class GunSystem : MonoBehaviour
             bulletsShot = bulletsPerTap;
            
             Shoot();
+            starterAssetsInputs.shoot = false;
         }
     }
     private void Shoot()
@@ -61,9 +62,18 @@ public class GunSystem : MonoBehaviour
         if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
             Debug.Log(rayHit.collider.name);
-            hitEffect.transform.position = rayHit.point;
-            hitEffect.transform.forward = rayHit.normal;
-            hitEffect.Emit(1);
+            if (rayHit.collider.CompareTag("Enemy"))
+            {
+                hitEffectBlood.transform.position = rayHit.point;
+                hitEffectBlood.transform.forward = rayHit.normal;
+                hitEffectBlood.Emit(1);
+            }
+            else
+            {
+                hitEffect.transform.position = rayHit.point;
+                hitEffect.transform.forward = rayHit.normal;
+                hitEffect.Emit(1);
+            }
         }
         muzzleFlash.Emit(1);
 
