@@ -19,6 +19,7 @@ public class ThirdPersonAimController : MonoBehaviour
     public GameObject pistolObject;
     public GameObject shotgunObject;
     public GameObject revolverObject;
+    public GameObject knifeObject;
     public GameObject crossHairUI;
     private Rig aimLayer;
     private RigBuilder rigBuilder;
@@ -113,6 +114,20 @@ public class ThirdPersonAimController : MonoBehaviour
                 aimLayer = aimLayerRevolver;
             }
         }
+        else if (weaponEquipped.Equals("knife"))
+        {
+            //check if grenade animation is true
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
+            {
+                knifeObject.SetActive(false);
+            }
+            else
+            {
+                knifeObject.SetActive(true);
+                aimLayer = null;
+            }
+        }
+
 
         // switch over weapons for testing
         if (starterAssetsInputs.switchWeapon)
@@ -138,13 +153,18 @@ public class ThirdPersonAimController : MonoBehaviour
                 }
                 weaponEquipped = "revolver";
             }
-            else
+            else if (weaponEquipped.Equals("revolver"))
             {
                 revolverObject.SetActive(false);
                 for (int i = 6; i <= 8; i++)
                 {
                     rigLayers[i].active = false;
                 }
+                weaponEquipped = "knife";
+            }
+            else
+            {
+                knifeObject.SetActive(false);
                 weaponEquipped = "pistol";
             }
             starterAssetsInputs.switchWeapon = false;
@@ -157,7 +177,8 @@ public class ThirdPersonAimController : MonoBehaviour
             aimVCamera.gameObject.SetActive(true);
             thirdPersonController.SetRotateOnMove(false);
 
-            aimLayer.weight += Time.deltaTime / aimDuration;
+            if (aimLayer != null)
+                aimLayer.weight += Time.deltaTime / aimDuration;
 
             Vector3 worldAimTarget = mouseWorldPos;
             worldAimTarget.y = transform.position.y;
@@ -170,7 +191,8 @@ public class ThirdPersonAimController : MonoBehaviour
             crossHairUI.SetActive(false);
             aimVCamera.gameObject.SetActive(false);
             thirdPersonController.SetRotateOnMove(true);
-            aimLayer.weight -= Time.deltaTime / aimDuration;
+            if (aimLayer != null)
+                aimLayer.weight -= Time.deltaTime / aimDuration;
         }
 
         

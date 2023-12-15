@@ -49769,6 +49769,7 @@ MonoBehaviour:
   pistolObject: {fileID: 6726167702769711762}
   shotgunObject: {fileID: 51417132737406549}
   revolverObject: {fileID: 8371360187717733583}
+  knifeObject: {fileID: 4772496241561897439}
   crossHairUI: {fileID: 0}
 --- !u!114 &4200137169132708763
 MonoBehaviour:
@@ -49859,6 +49860,7 @@ Transform:
   - {fileID: 1525289092047547207}
   - {fileID: 7157857823829037166}
   - {fileID: 2996978421574319315}
+  - {fileID: 5291871018395063141}
   m_Father: {fileID: 5203322692561348658}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4566335245998398938
@@ -91319,6 +91321,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &6746358324089201163
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6414125070800107374}
+    m_Modifications:
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1098
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0951
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280142118875376596, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_Name
+      value: 2K_Knife_Sand
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280142118875376596, guid: 092ab3257eff60b41bf654967fca85f9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 092ab3257eff60b41bf654967fca85f9, type: 3}
+--- !u!1 &4772496241561897439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2280142118875376596, guid: 092ab3257eff60b41bf654967fca85f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6746358324089201163}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5291871018395063141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1508531609862238574, guid: 092ab3257eff60b41bf654967fca85f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6746358324089201163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7232094346047667526
 PrefabInstance:
   m_ObjectHideFlags: 0
