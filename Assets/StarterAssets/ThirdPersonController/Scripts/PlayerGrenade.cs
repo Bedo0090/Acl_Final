@@ -23,8 +23,6 @@ public class PlayerGrenade : MonoBehaviour
 
     private Animator animator;
 
-    public GameObject pistolObject;
-
     public float throwingForce;
     public float throwUpForce;
     Vector3 forwardVec = Vector3.zero;
