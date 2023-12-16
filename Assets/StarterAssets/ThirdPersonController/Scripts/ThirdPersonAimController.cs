@@ -16,9 +16,11 @@ public class ThirdPersonAimController : MonoBehaviour
     public Rig aimLayerPistol;
     public Rig aimLayerSG;
     public Rig aimLayerRevolver;
+    public Rig aimLayerAR;
     public GameObject pistolObject;
     public GameObject shotgunObject;
     public GameObject revolverObject;
+    public GameObject ARObject;
     public GameObject knifeObject;
     public GameObject crossHairUI;
     private Rig aimLayer;
@@ -114,6 +116,27 @@ public class ThirdPersonAimController : MonoBehaviour
                 aimLayer = aimLayerRevolver;
             }
         }
+        else if (weaponEquipped.Equals("assaultrifle"))
+        {
+            //check if grenade animation is true
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
+            {
+                for (int i = 9; i <= 11; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                ARObject.SetActive(false);
+            }
+            else
+            {
+                for (int i = 9; i <= 11; i++)
+                {
+                    rigLayers[i].active = true;
+                }
+                ARObject.SetActive(true);
+                aimLayer = aimLayerAR;
+            }
+        }
         else if (weaponEquipped.Equals("knife"))
         {
             //check if grenade animation is true
@@ -157,6 +180,15 @@ public class ThirdPersonAimController : MonoBehaviour
             {
                 revolverObject.SetActive(false);
                 for (int i = 6; i <= 8; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                weaponEquipped = "assaultrifle";
+            }
+            else if (weaponEquipped.Equals("assaultrifle"))
+            {
+                ARObject.SetActive(false);
+                for (int i = 9; i <= 11; i++)
                 {
                     rigLayers[i].active = false;
                 }
