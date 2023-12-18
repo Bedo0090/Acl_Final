@@ -68839,6 +68839,7 @@ GameObject:
   - component: {fileID: 7770823407454398764}
   - component: {fileID: 4200137169132708763}
   - component: {fileID: 7658632236879818435}
+  - component: {fileID: 1233431214112493860}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -69197,6 +69198,19 @@ MonoBehaviour:
   throwingForce: 0
   throwUpForce: 0
   isGrappled: 0
+--- !u!114 &1233431214112493860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a86c058964bb34eae1b74ee2b1a9e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryCanvas: {fileID: 0}
 --- !u!1 &4432484298666434509
 GameObject:
   m_ObjectHideFlags: 0
