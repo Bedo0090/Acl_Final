@@ -7,7 +7,6 @@ public class PistolGun : MonoBehaviour
 {
     public int damage;
     public float fireRate, range, reloadTime;
-    public int magazineSize;
     private int bulletsLeft;
 
     public StarterAssetsInputs starterAssetsInputs;
@@ -22,7 +21,7 @@ public class PistolGun : MonoBehaviour
 
     private void Start()
     {
-        bulletsLeft = magazineSize;
+        bulletsLeft = 12;
         readyToShoot = true;
     }
     private void Update()
@@ -36,7 +35,7 @@ public class PistolGun : MonoBehaviour
             Shoot();
             starterAssetsInputs.shoot = false;
         }
-        if (starterAssetsInputs.reload && bulletsLeft < magazineSize && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 12 && !reloading)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -52,7 +51,7 @@ public class PistolGun : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log(rayHit.collider.name);
+            
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 hitEffectBlood.transform.position = rayHit.point;
@@ -84,8 +83,15 @@ public class PistolGun : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
-        Debug.Log(bulletsLeft);
+        if (Script2.pistolAmmo >= 12 - bulletsLeft) {
+            Script2.pistolAmmo -= (12 - bulletsLeft);
+            bulletsLeft = 12;
+        }
+        else
+        {
+            bulletsLeft += Script2.pistolAmmo;
+            Script2.pistolAmmo = 0;
+        }
         starterAssetsInputs.shoot = false;
         reloading = false;
     }

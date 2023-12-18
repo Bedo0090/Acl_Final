@@ -92,7 +92,10 @@ namespace StarterAssets
 
 		public void AimInput(bool newAimState)
 		{
-			aim = newAimState;
+			if (SceneSwitch.inventorySceneActive == true)
+				aim = false;
+			else
+				aim = newAimState;
 			if (aim)
 				sprint = false;
 		}
@@ -118,10 +121,11 @@ namespace StarterAssets
 			SetCursorState(cursorLocked);
 		}
 
-		private void SetCursorState(bool newState)
+		public static void SetCursorState(bool newState)
 		{
-			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-		}
+            Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+			Cursor.visible = !newState;
+        }
 	}
 	
 }

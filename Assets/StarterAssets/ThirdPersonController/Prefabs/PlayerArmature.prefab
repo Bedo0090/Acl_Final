@@ -69187,7 +69187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4de965d9c48284d8963ca0a37e0702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currGrenadeType: 0
   flashGrenadePrefab: {fileID: 1256277285304324385, guid: 1a0dba6f195183345900e8dacf58fff8,
     type: 3}
   handGrenadePrefab: {fileID: 5202439235739444797, guid: 68bd558f8186dd1469971085e8a5fb1e,
@@ -119662,7 +119661,6 @@ MonoBehaviour:
   fireRate: 0.2
   range: 100
   reloadTime: 1
-  magazineSize: 30
   starterAssetsInputs: {fileID: 135756642000475821}
   whatIsEnemy:
     serializedVersion: 2
@@ -119804,7 +119802,6 @@ MonoBehaviour:
   fireRate: 0.2
   range: 100
   reloadTime: 1
-  magazineSize: 12
   starterAssetsInputs: {fileID: 135756642000475821}
   whatIsEnemy:
     serializedVersion: 2
@@ -120974,7 +120971,6 @@ MonoBehaviour:
   fireRate: 0.5
   range: 100
   reloadTime: 1
-  magazineSize: 8
   starterAssetsInputs: {fileID: 135756642000475821}
   whatIsEnemy:
     serializedVersion: 2

@@ -9,6 +9,8 @@ public class ThirdPersonAimController : MonoBehaviour
 {
     public float aimDuration;
 
+    private Vector3 mouseWorldPos = Vector3.zero;
+
     public CinemachineVirtualCamera aimVCamera;
     public LayerMask aimCollideLayer = new LayerMask();
     private StarterAssetsInputs starterAssetsInputs;
@@ -28,7 +30,7 @@ public class ThirdPersonAimController : MonoBehaviour
     private List<RigLayer> rigLayers;
     private Animator animator;
 
-    private static string weaponEquipped;
+    public static string weaponEquipped;
 
     private void Start()
     {
@@ -41,10 +43,8 @@ public class ThirdPersonAimController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Vector3 mouseWorldPos = Vector3.zero;
-
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimCollideLayer))
@@ -52,9 +52,19 @@ public class ThirdPersonAimController : MonoBehaviour
             mouseWorldPos = raycastHit.point;
         }
 
+    }
+    private void Update()
+    {
+        
         // check what is equipped
         if (weaponEquipped.Equals("pistol"))
         {
+            //disable previous weapon
+            for (int i = 3; i <= 11; i++)
+            {
+                rigLayers[i].active = false;
+            }
+
             //check if grenade animation is true
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
             {
@@ -63,6 +73,16 @@ public class ThirdPersonAimController : MonoBehaviour
                     rigLayers[i].active = false;
                 }
                 pistolObject.SetActive(false);
+            }
+            //check if knife animation is true
+            else if (animator.GetCurrentAnimatorStateInfo(0).IsName("knife1") || animator.GetCurrentAnimatorStateInfo(0).IsName("knife2"))
+            {
+                for (int i = 0; i <= 2; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                pistolObject.SetActive(false);
+                knifeObject.SetActive(true);
             }
             else
             {
@@ -76,6 +96,14 @@ public class ThirdPersonAimController : MonoBehaviour
         }
         else if (weaponEquipped.Equals("shotgun"))
         {
+
+            //disable previous weapon
+            for (int i = 0; i <= 11; i++)
+            {
+                if (!(i >= 3 && i <= 5))
+                    rigLayers[i].active = false;
+            }
+
             //check if grenade animation is true
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
             {
@@ -84,6 +112,16 @@ public class ThirdPersonAimController : MonoBehaviour
                     rigLayers[i].active = false;
                 }
                 shotgunObject.SetActive(false);
+            }
+            //check if knife animation is true
+            else if (animator.GetCurrentAnimatorStateInfo(0).IsName("knife1") || animator.GetCurrentAnimatorStateInfo(0).IsName("knife2"))
+            {
+                for (int i = 3; i <= 5; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                shotgunObject.SetActive(false);
+                knifeObject.SetActive(true);
             }
             else
             {
@@ -97,6 +135,13 @@ public class ThirdPersonAimController : MonoBehaviour
         }
         else if (weaponEquipped.Equals("revolver"))
         {
+            //disable previous weapon
+            for (int i = 0; i <= 11; i++)
+            {
+                if (!(i >= 6 && i <= 8))
+                    rigLayers[i].active = false;
+            }
+
             //check if grenade animation is true
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
             {
@@ -105,6 +150,16 @@ public class ThirdPersonAimController : MonoBehaviour
                     rigLayers[i].active = false;
                 }
                 revolverObject.SetActive(false);
+            }
+            //check if knife animation is true
+            else if (animator.GetCurrentAnimatorStateInfo(0).IsName("knife1") || animator.GetCurrentAnimatorStateInfo(0).IsName("knife2"))
+            {
+                for (int i = 6; i <= 8; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                revolverObject.SetActive(false);
+                knifeObject.SetActive(true);
             }
             else
             {
@@ -118,6 +173,13 @@ public class ThirdPersonAimController : MonoBehaviour
         }
         else if (weaponEquipped.Equals("assaultrifle"))
         {
+            //disable previous weapon
+            for (int i = 0; i <= 11; i++)
+            {
+                if (!(i >= 9 && i <= 11))
+                    rigLayers[i].active = false;
+            }
+
             //check if grenade animation is true
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
             {
@@ -127,6 +189,16 @@ public class ThirdPersonAimController : MonoBehaviour
                 }
                 ARObject.SetActive(false);
             }
+            //check if knife animation is true
+            else if (animator.GetCurrentAnimatorStateInfo(0).IsName("knife1") || animator.GetCurrentAnimatorStateInfo(0).IsName("knife2"))
+            {
+                for (int i = 9; i <= 11; i++)
+                {
+                    rigLayers[i].active = false;
+                }
+                ARObject.SetActive(false);
+                knifeObject.SetActive(true);
+            }
             else
             {
                 for (int i = 9; i <= 11; i++)
@@ -135,19 +207,6 @@ public class ThirdPersonAimController : MonoBehaviour
                 }
                 ARObject.SetActive(true);
                 aimLayer = aimLayerAR;
-            }
-        }
-        else if (weaponEquipped.Equals("knife"))
-        {
-            //check if grenade animation is true
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
-            {
-                knifeObject.SetActive(false);
-            }
-            else
-            {
-                knifeObject.SetActive(true);
-                aimLayer = null;
             }
         }
 

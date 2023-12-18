@@ -6,7 +6,7 @@ public class GunSystem : MonoBehaviour
     //Gun stats
     public int damage;
     public float timeBetweenShooting, range, reloadTime;
-    public int magazineSize , bulletsPerTap;
+    public int bulletsPerTap;
     int bulletsLeft;
 
     //bools 
@@ -26,7 +26,7 @@ public class GunSystem : MonoBehaviour
 
     private void Awake()
     {
-        bulletsLeft = magazineSize;
+        bulletsLeft = 6;
         readyToShoot = true;
     }
     private void Update()
@@ -38,7 +38,7 @@ public class GunSystem : MonoBehaviour
     {
         shooting = starterAssetsInputs.shoot;
 
-        if (starterAssetsInputs.reload && bulletsLeft < magazineSize && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 6 && !reloading)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -59,7 +59,7 @@ public class GunSystem : MonoBehaviour
         //RayCast
         if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log(rayHit.collider.name);
+            
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 hitEffectBlood.transform.position = rayHit.point;
@@ -94,8 +94,16 @@ public class GunSystem : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
-        Debug.Log(bulletsLeft);
+        if (Script2.revolverAmmo >= 6 - bulletsLeft)
+        {
+            Script2.revolverAmmo -= (6 - bulletsLeft);
+            bulletsLeft = 6;
+        }
+        else
+        {
+            bulletsLeft += Script2.revolverAmmo;
+            Script2.revolverAmmo = 0;
+        }
         starterAssetsInputs.shoot = false;
         reloading = false;
     }

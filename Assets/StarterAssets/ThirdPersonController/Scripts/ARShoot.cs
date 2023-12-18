@@ -7,7 +7,6 @@ public class ARShoot : MonoBehaviour
 {
     public int damage;
     public float fireRate, range, reloadTime;
-    public int magazineSize;
     
     private int bulletsLeft;
 
@@ -22,7 +21,7 @@ public class ARShoot : MonoBehaviour
 
     private void Start()
     {
-        bulletsLeft = magazineSize;
+        bulletsLeft = 30;
         readyToShoot = true;
     }
     private void Update()
@@ -38,7 +37,7 @@ public class ARShoot : MonoBehaviour
         {
             Shoot();
         }
-        if (starterAssetsInputs.reload && bulletsLeft < magazineSize && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 30 && !reloading)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -54,7 +53,7 @@ public class ARShoot : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log(rayHit.collider.name);
+            
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 hitEffectBlood.transform.position = rayHit.point;
@@ -87,8 +86,16 @@ public class ARShoot : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
-        Debug.Log(bulletsLeft);
+        if (Script2.assualtRifleAmmo >= 30 - bulletsLeft)
+        {
+            Script2.assualtRifleAmmo -= (30 - bulletsLeft);
+            bulletsLeft = 30;
+        }
+        else
+        {
+            bulletsLeft += Script2.assualtRifleAmmo;
+            Script2.assualtRifleAmmo = 0;
+        }
         shooting = false;
         reloading = false;
     }

@@ -12,7 +12,7 @@ public enum GrenadeType
 public class PlayerGrenade : MonoBehaviour
 {
    
-    public GrenadeType currGrenadeType;
+    public static GrenadeType currGrenadeType;
 
     public GameObject flashGrenadePrefab;
     public GameObject handGrenadePrefab;
