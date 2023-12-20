@@ -165,7 +165,8 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             animatorinfo = this.animator.GetCurrentAnimatorStateInfo(0);
-            if (!animatorinfo.IsName("ThrowGrenade"))
+            if (!animatorinfo.IsName("ThrowGrenade") && !animatorinfo.IsName("Grappled") &&
+                !animatorinfo.IsName("Die") && !animatorinfo.IsName("HitReaction"))
                 Move();
         }
 

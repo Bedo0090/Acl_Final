@@ -17,7 +17,7 @@ public abstract class Grenade : MonoBehaviour
     void Start()
     {
         hasExploded = false;
-        radius = 3;
+        radius = 5;
     }
 
     // Update is called once per frame

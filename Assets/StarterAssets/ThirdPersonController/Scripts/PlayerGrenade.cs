@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 public enum GrenadeType
 {
@@ -29,7 +28,7 @@ public class PlayerGrenade : MonoBehaviour
     Vector3 upVec = Vector3.zero;
 
     public bool isGrappled;
-
+    PlayerManager playerManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +37,14 @@ public class PlayerGrenade : MonoBehaviour
         throwingForce = 5;
         throwUpForce = 5;
         isGrappled  = false;
+        playerManager = GetComponent<PlayerManager>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        isGrappled = playerManager.GetIsGrappled();
         if (Input.GetKeyDown(KeyCode.G) && currGrenadeType!=GrenadeType.None && animator.GetBool("Jump") != true)
         {
             forwardVec = playerHeadRef.transform.forward;
@@ -71,7 +73,9 @@ public class PlayerGrenade : MonoBehaviour
                 StartCounter();
                 ApplyForce();
 
-                isGrappled = false;
+                playerManager.SetIsGrappled(false, null);
+                playerManager.StopEnemyGrappling();
+
             }
 
             currGrenadeType = GrenadeType.None;
