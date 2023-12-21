@@ -81,14 +81,7 @@ public class storage : MonoBehaviour
         }
         if (player.storageItems.Contains(i))
         {
-            if(player.inventoryItems.Count == 6)
-            {
-                error = "You do not have enough space in your inventory";
-                errorLabel.text = error;
-                return;
-            }
-            player.storageItems.Remove(i);
-            storageUI.Q("storage").Remove(selectedSlot.button);
+            
             if (i.type == "Ammo")
             {
                 bool putted = false;
@@ -103,6 +96,13 @@ public class storage : MonoBehaviour
                 }
                 if (!putted)
                 {
+                    if (player.inventoryItems.Count == 6)
+                    {
+                        error = "You do not have enough space in your inventory";
+                        errorLabel.text = error;
+                        return;
+                    }
+
                     if (i.name == "Pistol Ammo" && player.equippedWeapon.name == "Pistol")
                     {
                         player.equippedWeaponAmmo = i;
@@ -123,10 +123,19 @@ public class storage : MonoBehaviour
                     player.inventoryItems.Add(i);
                     inventoryUI.Q("inventory").Add(selectedSlot.button);
                 }
-
+                player.storageItems.Remove(i);
+                storageUI.Q("storage").Remove(selectedSlot.button);
             }
             else
             {
+                if (player.inventoryItems.Count == 6)
+                {
+                    error = "You do not have enough space in your inventory";
+                    errorLabel.text = error;
+                    return;
+                }
+                player.storageItems.Remove(i);
+                storageUI.Q("storage").Remove(selectedSlot.button);
                 player.inventoryItems.Add(i);
                 inventoryUI.Q("inventory").Add(selectedSlot.button);
             }

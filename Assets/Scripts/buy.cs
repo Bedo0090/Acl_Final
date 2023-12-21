@@ -65,49 +65,7 @@ public class buy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UiBuy = GetComponent<UIDocument>();
-        inventoryUI = UiBuy.rootVisualElement.Q("store_buy").Q("container").Q("inventoryContainer");
-
-        foreach (itemData item in player.inventoryItems)
-        {
-            slot newSlot = new slot(item, itemButtonTemplate, 0);
-            if (item.type == "Ammo")
-            {
-                item.s = newSlot;
-            }
-            inventoryUI.Q("inventory").Add(newSlot.button);
-        }
-        gold = UiBuy.rootVisualElement.Q<Label>("gold");
-        errorLabel = UiBuy.rootVisualElement.Q<Label>("error");
-        errorLabel.text = error;
-        gold.text = "Gold Coins: " + player.coins.ToString();
-        VisualElement storeUI = UiBuy.rootVisualElement.Q("store_buy").Q("container").Q("store").Q("storeContainers");
-        VisualElement store1UI = storeUI.Q("storeContainer1");
-        VisualElement store2UI = storeUI.Q("storeContainer2");
-        Button buy1 = store1UI.Q("1").Q<Button>();
-        Button buy2 = store1UI.Q("2").Q<Button>();
-        Button buy3 = store1UI.Q("3").Q<Button>();
-        Button buy4 = store1UI.Q("4").Q<Button>();
-        Button buy5 = store1UI.Q("5").Q<Button>();
-        Button buy6 = store1UI.Q("6").Q<Button>();
-        Button buy7 = store2UI.Q("1").Q<Button>();
-        Button buy8 = store2UI.Q("2").Q<Button>();
-        Button buy9 = store2UI.Q("3").Q<Button>();
-        Button buy10 = store2UI.Q("4").Q<Button>();
-        Button buy11 = store2UI.Q("5").Q<Button>();
-        Button buy12 = store2UI.Q("6").Q<Button>();
-        buy1.RegisterCallback<ClickEvent>(butItem1);
-        buy2.RegisterCallback<ClickEvent>(butItem2);
-        buy3.RegisterCallback<ClickEvent>(butItem3);
-        buy4.RegisterCallback<ClickEvent>(butItem4);
-        buy5.RegisterCallback<ClickEvent>(butItem5);
-        buy6.RegisterCallback<ClickEvent>(butItem6);
-        buy7.RegisterCallback<ClickEvent>(butItem7);
-        buy8.RegisterCallback<ClickEvent>(butItem8);
-        buy9.RegisterCallback<ClickEvent>(butItem9);
-        buy10.RegisterCallback<ClickEvent>(butItem10);
-        buy11.RegisterCallback<ClickEvent>(butItem11);
-        buy12.RegisterCallback<ClickEvent>(butItem12);
+        
     }
 
     // Update is called once per frame
@@ -286,7 +244,27 @@ public class buy : MonoBehaviour
         }
         if (player.inventoryItems.Count < 6 && player.coins >= 150)
         {
-            itemData item = new itemData("PW", "Assault Rifle", 0);
+            foreach (itemData itemRifle in player.inventoryItems)
+            {
+                if (itemRifle != null)
+                    if (itemRifle.name.Equals("Assault Rifle"))
+                    {
+                        error = "You already have a weapon of this type";
+                        errorLabel.text = error;
+                        return;
+                    }
+            }
+            foreach (itemData itemRifle in player.storageItems)
+            {
+                if (itemRifle != null)
+                    if (itemRifle.name.Equals("Assault Rifle"))
+                    {
+                        error = "You already have a weapon of this type";
+                        errorLabel.text = error;
+                        return;
+                    }
+            }
+            itemData item = new itemData("PW", "Assault Rifle", 30);
             player.inventoryItems.Add(item);
             slot newSlot = new slot(item, itemButtonTemplate, 0);
             inventoryUI.Q("inventory").Add(newSlot.button);
@@ -311,7 +289,27 @@ public class buy : MonoBehaviour
         }
         if (player.inventoryItems.Count < 6 && player.coins >= 140)
         {
-            itemData item = new itemData("PW", "Shotgun", 0);
+            foreach (itemData itemRifle in player.inventoryItems)
+            {
+                if (itemRifle != null)
+                    if (itemRifle.name.Equals("Shotgun"))
+                    {
+                        error = "You already have a weapon of this type";
+                        errorLabel.text = error;
+                        return;
+                    }
+            }
+            foreach (itemData itemRifle in player.storageItems)
+            {
+                if (itemRifle != null)
+                    if (itemRifle.name.Equals("Shotgun"))
+                    {
+                        error = "You already have a weapon of this type";
+                        errorLabel.text = error;
+                        return;
+                    }
+            }
+            itemData item = new itemData("PW", "Shotgun", 8);
             player.inventoryItems.Add(item);
             slot newSlot = new slot(item, itemButtonTemplate, 0);
             inventoryUI.Q("inventory").Add(newSlot.button);

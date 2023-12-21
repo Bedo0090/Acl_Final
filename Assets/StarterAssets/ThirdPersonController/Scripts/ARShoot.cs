@@ -31,6 +31,9 @@ public class ARShoot : MonoBehaviour
 
     private void MyInput()
     {
+        if (player.equippedWeapon.name != "Assault Rifle")
+            return;
+
         player.equippedWeapon.number = bulletsLeft;
 
         shooting = Input.GetKey(KeyCode.Mouse0);
@@ -89,9 +92,7 @@ public class ARShoot : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        
         int ammo = player.equippedWeaponAmmo.number;
-
         if (ammo > 30 - bulletsLeft)
         {
             player.equippedWeaponAmmo.number -= (30 - bulletsLeft);

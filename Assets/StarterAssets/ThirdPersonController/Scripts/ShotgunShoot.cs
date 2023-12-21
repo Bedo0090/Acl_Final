@@ -30,6 +30,9 @@ public class ShotgunShoot : MonoBehaviour
     }
     private void MyInput()
     {
+        if (player.equippedWeapon.name != "Shotgun")
+            return;
+
         player.equippedWeapon.number = bulletsLeft;
 
         if (starterAssetsInputs.shoot && readyToShoot && !reloading && bulletsLeft > 0)

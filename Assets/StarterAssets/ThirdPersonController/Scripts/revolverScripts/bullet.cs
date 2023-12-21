@@ -36,6 +36,9 @@ public class GunSystem : MonoBehaviour
     }
     private void MyInput()
     {
+        if (player.equippedWeapon.name != "Revolver")
+            return;
+
         player.equippedWeapon.number = bulletsLeft;
 
         shooting = starterAssetsInputs.shoot;

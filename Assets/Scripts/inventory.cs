@@ -221,6 +221,14 @@ public class inventory : MonoBehaviour
     {
         itemData item1 = slectedSlot1.item;
         itemData item2 = slectedSlot2.item;
+        if (item1 == item2)
+        {
+            error = "Cannot combine selected items";
+            errorLabel.text = error;
+            slectedSlot1 = null;
+            slectedSlot2 = null;
+            return;
+        }
         bool canCompine = false;
         itemData resultedItem=null;
         slot resultedSlot=null;
@@ -263,7 +271,7 @@ public class inventory : MonoBehaviour
             }
             canCompine = true;
         }
-        else if (item1.name == "Normal Gunpowder" && item2.name == "High-Grade Gunpowder")
+        else if (item1.name == "Normal Gunpowder" && item2.name == "High-Grade Gunpowder" || item2.name == "Normal Gunpowder" && item1.name == "High-Grade Gunpowder")
         {
             resultedItem = new itemData("Ammo", "Shotgun Ammo", 8);
             foreach (var item in player.inventoryItems)
@@ -283,7 +291,7 @@ public class inventory : MonoBehaviour
             }
             canCompine = true;
         }
-        else if (item1.name == "High-GradeGunpowder " && item2.name == "High-GradeGunpowder")
+        else if (item1.name == "High-Grade Gunpowder" && item2.name == "High-Grade Gunpowder")
         {
             resultedItem = new itemData("Ammo", "Assault Rifle Ammo", 30);
             foreach (var item in player.inventoryItems)

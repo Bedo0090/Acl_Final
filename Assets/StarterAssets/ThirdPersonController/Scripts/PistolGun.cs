@@ -30,6 +30,9 @@ public class PistolGun : MonoBehaviour
     }
     private void MyInput()
     {
+        if (player.equippedWeapon.name != "Pistol")
+            return;
+
         player.equippedWeapon.number = bulletsLeft;
 
         if (starterAssetsInputs.shoot && readyToShoot && !reloading && bulletsLeft > 0)
@@ -88,7 +91,8 @@ public class PistolGun : MonoBehaviour
     {
         int ammo = player.equippedWeaponAmmo.number;
 
-        if (ammo > 12 - bulletsLeft) {
+        if (ammo > 12 - bulletsLeft) 
+        {
             player.equippedWeaponAmmo.number -= (12 - bulletsLeft);
             bulletsLeft = 12;
         }
