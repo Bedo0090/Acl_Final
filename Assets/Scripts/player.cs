@@ -21,18 +21,28 @@ public class player : MonoBehaviour
     void Start()
     {
         itemData item1 = new itemData("PW", "Pistol", 12);
+        //itemData item = new itemData("PW", "Revolver",6);
+        //itemData item = new itemData("PW", "Assault Rifle",30);
+        //itemData item = new itemData("PW", "Shotgun",8);
+
         itemData item2 = new itemData("Herb", "Green Herb", 0);
+        //itemData item = new itemData("Herb", "Red Herb", 0);
+        //itemData item = new itemData("Herb", "Red + Red Mixture", 0);
+        //itemData item = new itemData("Herb", "Green + Red Mixture", 0);
+        //itemData item = new itemData("Mix", "Green + Green Mixture", 0);
+
         itemData item3 = new itemData("Ammo", "Pistol Ammo", 12);
-        itemData item4 = new itemData("Herb", "Green Herb", 0);
-        itemData item5 = new itemData("Mix", "Green + Green Mixture", 0);
-        itemData item6 = new itemData("Grenade", "Hand Grenade", 0);
+        //itemData item = new itemData("Ammo", "Assault Rifle Ammo", 30);
+        //itemData item = new itemData("Ammo", "Revolver Ammo", 6);
+        //itemData item = new itemData("Ammo", "Shotgun Ammo", 8);
+
+        itemData item4 = new itemData("Grenade", "Hand Grenade", 0);
+        //itemData item = new itemData("Grenade", "Flash Grenade", 0);
 
         inventoryItems.Add(item1);
         inventoryItems.Add(item2);
         inventoryItems.Add(item3);
         inventoryItems.Add(item4);
-        inventoryItems.Add(item5);
-        inventoryItems.Add(item6);
 
         equippedWeapon = item1;
         equippedWeaponAmmo = item3;
