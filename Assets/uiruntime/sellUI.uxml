@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="store_sell" style="flex-grow: 1; flex-direction: row; background-image: url(&apos;project://database/Assets/uiruntime/woodfinal.jpg?fileID=2800000&amp;guid=5a639b499c594bd429612ac0a32c360b&amp;type=3#woodfinal&apos;); -unity-background-image-tint-color: rgb(56, 56, 56);">
+        <ui:VisualElement name="inventoryContainer" style="flex-grow: 1;">
+            <ui:Label tabindex="-1" text="Gold" parse-escape-sequences="true" display-tooltip-when-elided="true" name="gold" style="align-self: center; color: rgb(255, 255, 27); font-size: 20px;" />
+            <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(231, 165, 20); font-size: 18px; align-self: center;" />
+            <ui:Label tabindex="-1" text="Sellable Items in your Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(152, 72, 51);" />
+            <ui:VisualElement name="inventory_sellable" style="flex-grow: 1; flex-direction: row; max-height: 150px; min-height: 150px;" />
+            <ui:Label tabindex="-1" text="Non-sellable Items in your Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(152, 72, 51);" />
+            <ui:VisualElement name="inventory_nonSellable" style="flex-grow: 1; max-height: 100px; min-height: 100px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button text="Sell" parse-escape-sequences="true" display-tooltip-when-elided="true" name="sell" />
+</ui:UXML>

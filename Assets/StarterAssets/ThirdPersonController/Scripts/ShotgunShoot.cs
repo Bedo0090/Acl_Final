@@ -7,7 +7,6 @@ public class ShotgunShoot : MonoBehaviour
 {
     public int damage;
     public float fireRate, range, reloadTime;
-    public int magazineSize;
     private int bulletsLeft;
 
     public StarterAssetsInputs starterAssetsInputs;
@@ -22,7 +21,7 @@ public class ShotgunShoot : MonoBehaviour
 
     private void Start()
     {
-        bulletsLeft = magazineSize;
+        bulletsLeft = 8;
         readyToShoot = true;
     }
     private void Update()
@@ -31,13 +30,18 @@ public class ShotgunShoot : MonoBehaviour
     }
     private void MyInput()
     {
-        
+        if (player.equippedWeapon.name != "Shotgun")
+            return;
+
+        player.equippedWeapon.number = bulletsLeft;
+
         if (starterAssetsInputs.shoot && readyToShoot && !reloading && bulletsLeft > 0)
         {
             Shoot();
             starterAssetsInputs.shoot = false;
+            starterAssetsInputs.reload = false;
         }
-        if (starterAssetsInputs.reload && bulletsLeft < magazineSize && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 8 && !reloading && player.equippedWeaponAmmo != null)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -53,7 +57,7 @@ public class ShotgunShoot : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log(rayHit.collider.name);
+            
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 hitEffectBlood.transform.position = rayHit.point;
@@ -85,8 +89,18 @@ public class ShotgunShoot : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
-        Debug.Log(bulletsLeft);
+        int ammo = player.equippedWeaponAmmo.number;
+
+        if (ammo > 8 - bulletsLeft)
+        {
+            player.equippedWeaponAmmo.number -= (8 - bulletsLeft);
+            bulletsLeft = 8;
+        }
+        else
+        {
+            bulletsLeft += ammo;
+            player.equippedWeaponAmmo.number = 0;
+        }
         starterAssetsInputs.shoot = false;
         reloading = false;
     }

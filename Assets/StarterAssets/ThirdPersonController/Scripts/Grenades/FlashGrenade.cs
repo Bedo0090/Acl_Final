@@ -8,6 +8,10 @@ public class FlashGrenade : Grenade
         foreach (Collider col in collidersToKnock)
         {
             //Knock them down
+            if (col.gameObject.CompareTag("Enemy"))
+            {
+                col.gameObject.GetComponent<Enemy>().GetKnocked();
+            }
         }
     }
 }

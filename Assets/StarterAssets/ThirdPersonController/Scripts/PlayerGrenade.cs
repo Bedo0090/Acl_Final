@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 public enum GrenadeType
 {
@@ -12,7 +11,7 @@ public enum GrenadeType
 public class PlayerGrenade : MonoBehaviour
 {
    
-    public GrenadeType currGrenadeType;
+    public static GrenadeType currGrenadeType;
 
     public GameObject flashGrenadePrefab;
     public GameObject handGrenadePrefab;
@@ -29,7 +28,7 @@ public class PlayerGrenade : MonoBehaviour
     Vector3 upVec = Vector3.zero;
 
     public bool isGrappled;
-
+    PlayerManager playerManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +37,26 @@ public class PlayerGrenade : MonoBehaviour
         throwingForce = 5;
         throwUpForce = 5;
         isGrappled  = false;
+        playerManager = GetComponent<PlayerManager>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player.equippedGrenade != null)
+        {
+            if (player.equippedGrenade.name.Equals("Hand Grenade"))
+                currGrenadeType = GrenadeType.Hand;
+            else
+                currGrenadeType = GrenadeType.Flash;
+        }
+        else
+        {
+            currGrenadeType = GrenadeType.None;
+        }
+
+        isGrappled = playerManager.GetIsGrappled();
         if (Input.GetKeyDown(KeyCode.G) && currGrenadeType!=GrenadeType.None && animator.GetBool("Jump") != true)
         {
             forwardVec = playerHeadRef.transform.forward;
@@ -71,20 +85,24 @@ public class PlayerGrenade : MonoBehaviour
                 StartCounter();
                 ApplyForce();
 
-                isGrappled = false;
+                playerManager.SetIsGrappled(false, null);
+                playerManager.StopEnemyGrappling();
+
             }
 
             currGrenadeType = GrenadeType.None;
+            player.inventoryItems.Remove(player.equippedGrenade);
+            player.equippedGrenade = null;
 
         }
     }
 
-    public void EquipHandGrenade()
+    public static void EquipHandGrenade()
     {
         currGrenadeType = GrenadeType.Hand;
     }
 
-    public void EquipFlashGrenade()
+    public static void EquipFlashGrenade()
     {
         currGrenadeType = GrenadeType.Flash;
     }

@@ -6,7 +6,7 @@ public class GunSystem : MonoBehaviour
     //Gun stats
     public int damage;
     public float timeBetweenShooting, range, reloadTime;
-    public int magazineSize , bulletsPerTap;
+    public int bulletsPerTap;
     int bulletsLeft;
 
     //bools 
@@ -26,7 +26,7 @@ public class GunSystem : MonoBehaviour
 
     private void Awake()
     {
-        bulletsLeft = magazineSize;
+        bulletsLeft = 6;
         readyToShoot = true;
     }
     private void Update()
@@ -36,9 +36,14 @@ public class GunSystem : MonoBehaviour
     }
     private void MyInput()
     {
+        if (player.equippedWeapon.name != "Revolver")
+            return;
+
+        player.equippedWeapon.number = bulletsLeft;
+
         shooting = starterAssetsInputs.shoot;
 
-        if (starterAssetsInputs.reload && bulletsLeft < magazineSize && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 6 && !reloading && player.equippedWeaponAmmo != null)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -49,6 +54,7 @@ public class GunSystem : MonoBehaviour
         {  
             Shoot();
             starterAssetsInputs.shoot = false;
+            starterAssetsInputs.reload = false;
         }
     }
     private void Shoot()
@@ -59,7 +65,7 @@ public class GunSystem : MonoBehaviour
         //RayCast
         if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log(rayHit.collider.name);
+            
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 hitEffectBlood.transform.position = rayHit.point;
@@ -94,8 +100,20 @@ public class GunSystem : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
-        Debug.Log(bulletsLeft);
+        int ammo = player.equippedWeaponAmmo.number;
+
+        if (ammo > 6 - bulletsLeft)
+        {
+            player.equippedWeaponAmmo.number -= (6 - bulletsLeft);
+            bulletsLeft = 6;
+        }
+        else
+        {
+            bulletsLeft += ammo;
+            player.equippedWeaponAmmo.number = 0;
+            player.inventoryItems.Remove(player.equippedWeaponAmmo);
+            player.equippedWeaponAmmo = null;
+        }
         starterAssetsInputs.shoot = false;
         reloading = false;
     }

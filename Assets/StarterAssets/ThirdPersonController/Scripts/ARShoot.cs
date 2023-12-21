@@ -7,7 +7,6 @@ public class ARShoot : MonoBehaviour
 {
     public int damage;
     public float fireRate, range, reloadTime;
-    public int magazineSize;
     
     private int bulletsLeft;
 
@@ -22,7 +21,7 @@ public class ARShoot : MonoBehaviour
 
     private void Start()
     {
-        bulletsLeft = magazineSize;
+        bulletsLeft = 30;
         readyToShoot = true;
     }
     private void Update()
@@ -32,13 +31,19 @@ public class ARShoot : MonoBehaviour
 
     private void MyInput()
     {
+        if (player.equippedWeapon.name != "Assault Rifle")
+            return;
+
+        player.equippedWeapon.number = bulletsLeft;
+
         shooting = Input.GetKey(KeyCode.Mouse0);
 
         if (starterAssetsInputs.aim && shooting && readyToShoot && !reloading && bulletsLeft > 0)
         {
             Shoot();
+            starterAssetsInputs.reload = false;
         }
-        if (starterAssetsInputs.reload && bulletsLeft < magazineSize && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 30 && !reloading && player.equippedWeaponAmmo != null)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -54,7 +59,7 @@ public class ARShoot : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         if (Physics.Raycast(ray, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log(rayHit.collider.name);
+            
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 hitEffectBlood.transform.position = rayHit.point;
@@ -87,8 +92,19 @@ public class ARShoot : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
-        Debug.Log(bulletsLeft);
+        int ammo = player.equippedWeaponAmmo.number;
+        if (ammo > 30 - bulletsLeft)
+        {
+            player.equippedWeaponAmmo.number -= (30 - bulletsLeft);
+            bulletsLeft = 30;
+        }
+        else
+        {
+            bulletsLeft += ammo;
+            player.equippedWeaponAmmo.number = 0;
+            player.inventoryItems.Remove(player.equippedWeaponAmmo);
+            player.equippedWeaponAmmo = null;
+        }
         shooting = false;
         reloading = false;
     }
