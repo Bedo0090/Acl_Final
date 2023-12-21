@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     GameObject[] healthBar; 
     void Start()
     {
-        playerHealth = 8;
+        playerHealth = player.healthpoints;
         animator = GetComponent<Animator>();
         playerManager = GetComponent<PlayerManager>();
         healthBar = new GameObject[8] {health1, health2, health3 , health4 , health5 , health6 , health7 , health8};
@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        player.healthpoints = playerHealth;
     }
 
     public void TakeDmg(int dmg)

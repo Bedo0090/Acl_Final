@@ -30,13 +30,15 @@ public class ShotgunShoot : MonoBehaviour
     }
     private void MyInput()
     {
-        
+        player.equippedWeapon.number = bulletsLeft;
+
         if (starterAssetsInputs.shoot && readyToShoot && !reloading && bulletsLeft > 0)
         {
             Shoot();
             starterAssetsInputs.shoot = false;
+            starterAssetsInputs.reload = false;
         }
-        if (starterAssetsInputs.reload && bulletsLeft < 8 && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 8 && !reloading && player.equippedWeaponAmmo != null)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -84,15 +86,17 @@ public class ShotgunShoot : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        if (Script2.shotgunAmmo >= 8 - bulletsLeft)
+        int ammo = player.equippedWeaponAmmo.number;
+
+        if (ammo > 8 - bulletsLeft)
         {
-            Script2.shotgunAmmo -= (8 - bulletsLeft);
+            player.equippedWeaponAmmo.number -= (8 - bulletsLeft);
             bulletsLeft = 8;
         }
         else
         {
-            bulletsLeft += Script2.shotgunAmmo;
-            Script2.shotgunAmmo = 0;
+            bulletsLeft += ammo;
+            player.equippedWeaponAmmo.number = 0;
         }
         starterAssetsInputs.shoot = false;
         reloading = false;

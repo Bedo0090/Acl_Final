@@ -36,9 +36,11 @@ public class GunSystem : MonoBehaviour
     }
     private void MyInput()
     {
+        player.equippedWeapon.number = bulletsLeft;
+
         shooting = starterAssetsInputs.shoot;
 
-        if (starterAssetsInputs.reload && bulletsLeft < 6 && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 6 && !reloading && player.equippedWeaponAmmo != null)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -49,6 +51,7 @@ public class GunSystem : MonoBehaviour
         {  
             Shoot();
             starterAssetsInputs.shoot = false;
+            starterAssetsInputs.reload = false;
         }
     }
     private void Shoot()
@@ -94,15 +97,19 @@ public class GunSystem : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        if (Script2.revolverAmmo >= 6 - bulletsLeft)
+        int ammo = player.equippedWeaponAmmo.number;
+
+        if (ammo > 6 - bulletsLeft)
         {
-            Script2.revolverAmmo -= (6 - bulletsLeft);
+            player.equippedWeaponAmmo.number -= (6 - bulletsLeft);
             bulletsLeft = 6;
         }
         else
         {
-            bulletsLeft += Script2.revolverAmmo;
-            Script2.revolverAmmo = 0;
+            bulletsLeft += ammo;
+            player.equippedWeaponAmmo.number = 0;
+            player.inventoryItems.Remove(player.equippedWeaponAmmo);
+            player.equippedWeaponAmmo = null;
         }
         starterAssetsInputs.shoot = false;
         reloading = false;

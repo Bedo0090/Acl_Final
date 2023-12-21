@@ -1,0 +1,69 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:ScrollView name="store_buy" style="background-image: url(&apos;project://database/Assets/uiruntime/woodfinal.jpg?fileID=2800000&amp;guid=5a639b499c594bd429612ac0a32c360b&amp;type=3#woodfinal&apos;); -unity-background-image-tint-color: rgb(56, 56, 56);">
+        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="gold" style="align-self: center; color: rgb(255, 255, 27);" />
+        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="error" style="align-self: center; color: rgb(255, 27, 27);" />
+        <ui:VisualElement name="container" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="store" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Store" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-items: center; align-self: center; color: rgb(231, 165, 20); font-size: 18px;" />
+                <ui:VisualElement name="storeContainers" style="flex-grow: 1; flex-direction: row; align-items: flex-start;">
+                    <ui:VisualElement name="storeContainer1" style="flex-grow: 1;">
+                        <ui:VisualElement name="1" style="flex-grow: 1; align-items: center; border-left-color: rgba(144, 73, 14, 0); border-right-color: rgba(144, 73, 14, 0); border-top-color: rgba(144, 73, 14, 0); border-bottom-color: rgba(144, 73, 14, 0); border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-left-radius: 1px; border-top-right-radius: 1px; border-bottom-right-radius: 1px; border-bottom-left-radius: 1px;">
+                            <ui:Label tabindex="-1" text="Green Herb  &#10;  20 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); border-left-color: rgba(238, 17, 17, 0); border-right-color: rgba(238, 17, 17, 0); border-top-color: rgba(238, 17, 17, 0); border-bottom-color: rgba(238, 17, 17, 0);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="2" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="Red Herb  &#10;10 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="3" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="Normal Gunpowder  &#10;           10 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="4" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="High-Grade Gunpowder  &#10;               20 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="5" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="Hand Grenade  &#10;     15 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="6" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="Flash Grenade  &#10;     15 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="storeContainer2" style="flex-grow: 1;">
+                        <ui:VisualElement name="1" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="Assault Rifle  &#10;  150 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="2" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text=" Shotgun  &#10;150 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="3" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="12 Pistol Ammo&#10;      30 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="4" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="30 Assault Rifle Ammo&#10;            30 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="5" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="8 Shotgun Ammo  &#10;      40 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="6" style="flex-grow: 1; align-items: center;">
+                            <ui:Label tabindex="-1" text="6 Revolver Ammo  &#10;        70 Coins" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                            <ui:Button text="Buy" parse-escape-sequences="true" display-tooltip-when-elided="true" style="max-width: 50px; min-width: 50px; max-height: 30px; min-height: 30px;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventoryContainer" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="color: rgb(231, 165, 20); font-size: 18px;" />
+                <ui:ScrollView name="inventory" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+</ui:UXML>

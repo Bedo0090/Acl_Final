@@ -68842,6 +68842,7 @@ GameObject:
   - component: {fileID: 1233431214112493860}
   - component: {fileID: 615302570824115470}
   - component: {fileID: 6041541469471756338}
+  - component: {fileID: 6889296317423716359}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -69213,6 +69214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryCanvas: {fileID: 0}
+  storeCanvas: {fileID: 0}
 --- !u!114 &615302570824115470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69249,6 +69251,18 @@ MonoBehaviour:
   health8: {fileID: 2350012528078480320}
   emptyMat: {fileID: 2100000, guid: 9ddd59f52b34a224e86fbea3bbcdbe67, type: 2}
   fullMat: {fileID: 2100000, guid: 0099ce0d7d886d94188bc7be9ac8f615, type: 2}
+--- !u!114 &6889296317423716359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064be401db35ce646b8cc549c6277e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4432484298666434509
 GameObject:
   m_ObjectHideFlags: 0
@@ -119713,7 +119727,7 @@ MonoBehaviour:
   damage: 1
   fireRate: 0.2
   range: 100
-  reloadTime: 1
+  reloadTime: 0
   starterAssetsInputs: {fileID: 135756642000475821}
   whatIsEnemy:
     serializedVersion: 2
@@ -119854,7 +119868,7 @@ MonoBehaviour:
   damage: 2
   fireRate: 0.2
   range: 100
-  reloadTime: 1
+  reloadTime: 0
   starterAssetsInputs: {fileID: 135756642000475821}
   whatIsEnemy:
     serializedVersion: 2
@@ -120005,6 +120019,11 @@ PrefabInstance:
       propertyPath: hitEffect
       value: 
       objectReference: {fileID: 3595237471027582734}
+    - target: {fileID: 6653483184661838144, guid: b26f9214e8f69d74e8fe0e2fbdd43575,
+        type: 3}
+      propertyPath: reloadTime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6653483184661838144, guid: b26f9214e8f69d74e8fe0e2fbdd43575,
         type: 3}
       propertyPath: muzzleFlash
@@ -121023,7 +121042,7 @@ MonoBehaviour:
   damage: 3
   fireRate: 0.5
   range: 100
-  reloadTime: 1
+  reloadTime: 0
   starterAssetsInputs: {fileID: 135756642000475821}
   whatIsEnemy:
     serializedVersion: 2

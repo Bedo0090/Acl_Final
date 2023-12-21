@@ -44,6 +44,18 @@ public class PlayerGrenade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.equippedGrenade != null)
+        {
+            if (player.equippedGrenade.name.Equals("Hand Grenade"))
+                currGrenadeType = GrenadeType.Hand;
+            else
+                currGrenadeType = GrenadeType.Flash;
+        }
+        else
+        {
+            currGrenadeType = GrenadeType.None;
+        }
+
         isGrappled = playerManager.GetIsGrappled();
         if (Input.GetKeyDown(KeyCode.G) && currGrenadeType!=GrenadeType.None && animator.GetBool("Jump") != true)
         {
@@ -79,16 +91,18 @@ public class PlayerGrenade : MonoBehaviour
             }
 
             currGrenadeType = GrenadeType.None;
+            player.inventoryItems.Remove(player.equippedGrenade);
+            player.equippedGrenade = null;
 
         }
     }
 
-    public void EquipHandGrenade()
+    public static void EquipHandGrenade()
     {
         currGrenadeType = GrenadeType.Hand;
     }
 
-    public void EquipFlashGrenade()
+    public static void EquipFlashGrenade()
     {
         currGrenadeType = GrenadeType.Flash;
     }

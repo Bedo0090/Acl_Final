@@ -30,8 +30,6 @@ public class ThirdPersonAimController : MonoBehaviour
     private List<RigLayer> rigLayers;
     private Animator animator;
 
-    public static string weaponEquipped;
-
     private void Start()
     {
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
@@ -39,7 +37,6 @@ public class ThirdPersonAimController : MonoBehaviour
         rigBuilder = GetComponent<RigBuilder>();
         rigLayers = rigBuilder.layers;
         aimLayer = aimLayerPistol;
-        weaponEquipped = "pistol";
         animator = GetComponent<Animator>();
     }
 
@@ -57,7 +54,7 @@ public class ThirdPersonAimController : MonoBehaviour
     {
         
         // check what is equipped
-        if (weaponEquipped.Equals("pistol"))
+        if (player.equippedWeapon.name.Equals("Pistol"))
         {
             //disable previous weapon
             for (int i = 3; i <= 11; i++)
@@ -94,7 +91,7 @@ public class ThirdPersonAimController : MonoBehaviour
                 aimLayer = aimLayerPistol;
             }
         }
-        else if (weaponEquipped.Equals("shotgun"))
+        else if (player.equippedWeapon.name.Equals("Shotgun"))
         {
 
             //disable previous weapon
@@ -133,7 +130,7 @@ public class ThirdPersonAimController : MonoBehaviour
                 aimLayer = aimLayerSG;
             }
         }
-        else if (weaponEquipped.Equals("revolver"))
+        else if (player.equippedWeapon.name.Equals("Revolver"))
         {
             //disable previous weapon
             for (int i = 0; i <= 11; i++)
@@ -171,7 +168,7 @@ public class ThirdPersonAimController : MonoBehaviour
                 aimLayer = aimLayerRevolver;
             }
         }
-        else if (weaponEquipped.Equals("assaultrifle"))
+        else if (player.equippedWeapon.name.Equals("Assault Rifle"))
         {
             //disable previous weapon
             for (int i = 0; i <= 11; i++)
@@ -211,7 +208,7 @@ public class ThirdPersonAimController : MonoBehaviour
         }
 
 
-        // switch over weapons for testing
+        /*// switch over weapons for testing
         if (starterAssetsInputs.switchWeapon)
         {
             starterAssetsInputs.shoot = false;
@@ -259,7 +256,7 @@ public class ThirdPersonAimController : MonoBehaviour
                 weaponEquipped = "pistol";
             }
             starterAssetsInputs.switchWeapon = false;
-        }
+        }*/
 
         // aim for any weapon
         if (starterAssetsInputs.aim)

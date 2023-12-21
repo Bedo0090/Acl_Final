@@ -31,13 +31,16 @@ public class ARShoot : MonoBehaviour
 
     private void MyInput()
     {
+        player.equippedWeapon.number = bulletsLeft;
+
         shooting = Input.GetKey(KeyCode.Mouse0);
 
         if (starterAssetsInputs.aim && shooting && readyToShoot && !reloading && bulletsLeft > 0)
         {
             Shoot();
+            starterAssetsInputs.reload = false;
         }
-        if (starterAssetsInputs.reload && bulletsLeft < 30 && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 30 && !reloading && player.equippedWeaponAmmo != null)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -86,15 +89,20 @@ public class ARShoot : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        if (Script2.assualtRifleAmmo >= 30 - bulletsLeft)
+        
+        int ammo = player.equippedWeaponAmmo.number;
+
+        if (ammo > 30 - bulletsLeft)
         {
-            Script2.assualtRifleAmmo -= (30 - bulletsLeft);
+            player.equippedWeaponAmmo.number -= (30 - bulletsLeft);
             bulletsLeft = 30;
         }
         else
         {
-            bulletsLeft += Script2.assualtRifleAmmo;
-            Script2.assualtRifleAmmo = 0;
+            bulletsLeft += ammo;
+            player.equippedWeaponAmmo.number = 0;
+            player.inventoryItems.Remove(player.equippedWeaponAmmo);
+            player.equippedWeaponAmmo = null;
         }
         shooting = false;
         reloading = false;

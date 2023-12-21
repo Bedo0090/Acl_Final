@@ -30,12 +30,15 @@ public class PistolGun : MonoBehaviour
     }
     private void MyInput()
     {
+        player.equippedWeapon.number = bulletsLeft;
+
         if (starterAssetsInputs.shoot && readyToShoot && !reloading && bulletsLeft > 0)
         {
             Shoot();
             starterAssetsInputs.shoot = false;
+            starterAssetsInputs.reload = false;
         }
-        if (starterAssetsInputs.reload && bulletsLeft < 12 && !reloading)
+        if (starterAssetsInputs.reload && bulletsLeft < 12 && !reloading && player.equippedWeaponAmmo != null)
         {
             Reload();
             starterAssetsInputs.reload = false;
@@ -83,14 +86,18 @@ public class PistolGun : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        if (Script2.pistolAmmo >= 12 - bulletsLeft) {
-            Script2.pistolAmmo -= (12 - bulletsLeft);
+        int ammo = player.equippedWeaponAmmo.number;
+
+        if (ammo > 12 - bulletsLeft) {
+            player.equippedWeaponAmmo.number -= (12 - bulletsLeft);
             bulletsLeft = 12;
         }
         else
         {
-            bulletsLeft += Script2.pistolAmmo;
-            Script2.pistolAmmo = 0;
+            bulletsLeft += ammo;
+            player.equippedWeaponAmmo.number = 0;
+            player.inventoryItems.Remove(player.equippedWeaponAmmo);
+            player.equippedWeaponAmmo = null;
         }
         starterAssetsInputs.shoot = false;
         reloading = false;
