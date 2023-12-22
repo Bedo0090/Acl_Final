@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject health6;
     public GameObject health7;
     public GameObject health8;
+
     public static bool change = false;
 
     public Material emptyMat;
@@ -27,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     bool invincible;
     void Start()
     {
-        playerHealth = player.healthpoints;
+        playerHealth = 8;
         animator = GetComponent<Animator>();
         playerManager = GetComponent<PlayerManager>();
         healthBar = new GameObject[8] {health1, health2, health3 , health4 , health5 , health6 , health7 , health8};

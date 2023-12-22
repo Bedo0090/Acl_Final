@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
+
 
 public class PlayerManager : MonoBehaviour
 {
     public static bool isGrappled = false;
     Animator animator;
-    public bool gameEneded;
+    public static bool gameEneded;
     GameObject grapplerEnemy;
     public GameObject Door;
     public GameObject Door1;
@@ -16,6 +18,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject ClubDoor;
     public GameObject DiamondDoor;
     public GameObject KeyCardDoor;
+
+    public GameObject gameoverCanvas; 
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,16 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        if (gameEneded == true)
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("FinalState"))
+            {
+                gameoverCanvas.SetActive(true);
+                Time.timeScale = 0;
+                StarterAssetsInputs.SetCursorState(false);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             Destroy(Door);
@@ -103,4 +117,5 @@ public class PlayerManager : MonoBehaviour
         gameEneded = true;
     }
 
+    
 }

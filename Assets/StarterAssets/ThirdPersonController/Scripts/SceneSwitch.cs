@@ -14,6 +14,7 @@ public class SceneSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (inventorySceneActive)
@@ -21,8 +22,6 @@ public class SceneSwitch : MonoBehaviour
                 Time.timeScale = 1;
                 inventoryCanvas.SetActive(false);
                 inventorySceneActive = false;
-                storeCanvas.SetActive(false);
-                storeSceneActive = false;
                 StarterAssetsInputs.SetCursorState(true);
             }
             else
@@ -33,24 +32,10 @@ public class SceneSwitch : MonoBehaviour
                 StarterAssetsInputs.SetCursorState(false);
             }
         }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if (storeSceneActive)
-            {
-                Time.timeScale = 1;
-                storeCanvas.SetActive(false);
-                storeSceneActive = false;
-                inventoryCanvas.SetActive(false);
-                inventorySceneActive = false;
-                StarterAssetsInputs.SetCursorState(true);
-            }
-            else
-            {
-                Time.timeScale = 0;
-                storeCanvas.SetActive(true);
-                storeSceneActive = true;
-                StarterAssetsInputs.SetCursorState(false);
-            }
-        }
+    }
+
+    public void MainMenuSwitch()
+    {
+        SceneManager.LoadScene("Main menu");
     }
 }

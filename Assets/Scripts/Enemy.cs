@@ -143,7 +143,7 @@ public class Enemy : MonoBehaviour
 
             }
         }
-        else if ((playerManager.GetIsGrappled() && !grapplingPlayer) || playerManager.gameEneded)
+        else if ((playerManager.GetIsGrappled() && !grapplingPlayer) || PlayerManager.gameEneded)
         {
             Idle();
         }

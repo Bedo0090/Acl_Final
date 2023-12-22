@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using StarterAssets;
 
 public class player : MonoBehaviour
 {
     public static List<itemData> inventoryItems=new List<itemData>();
     public static List<itemData> storageItems=new List<itemData>();
-    public static int coins=30;
-    public static int durability=10;
-    public static int healthpoints=8;
+    public static int coins;
+    public static int durability;
+    public static int healthpoints;
     public static int stasispoints=0;
     public static itemData equippedWeapon;
     public static itemData equippedWeaponAmmo;
     public static itemData equippedGrenade;
     public static Transform playerTransform;
+    public GameObject storeCanvas;
+    public GameObject nearStore;
+
+    public static GameObject gameoverCanvas;
     private void OnEnable()
     {
         
@@ -45,8 +51,16 @@ public class player : MonoBehaviour
         inventoryItems.Add(item3);
         //inventoryItems.Add(item4);
 
+        healthpoints = 8;
+        coins = 30;
+        durability = 10;
+
         equippedWeapon = item1;
         equippedWeaponAmmo = item3;
+        equippedGrenade = null;
+
+        Time.timeScale = 1;
+        StarterAssetsInputs.SetCursorState(true);
     }
 
     // Update is called once per frame
@@ -54,6 +68,28 @@ public class player : MonoBehaviour
     {
         playerTransform = GetComponent<Transform>();
         pickUp();
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            float f = Vector3.Distance(transform.position, nearStore.transform.position);
+            if (f < 2f)
+            {
+                if (SceneSwitch.storeSceneActive)
+                {
+                    Time.timeScale = 1;
+                    storeCanvas.SetActive(false);
+                    SceneSwitch.storeSceneActive = false;
+                    StarterAssetsInputs.SetCursorState(true);
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                    storeCanvas.SetActive(true);
+                    SceneSwitch.storeSceneActive = true;
+                    StarterAssetsInputs.SetCursorState(false);
+                }
+            }
+        }
     }
     private void OnTriggerStay (Collider collision)
     {
@@ -120,6 +156,26 @@ public class player : MonoBehaviour
                 }
             }
         }
+        /*if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (collision.gameObject.CompareTag("Store"))
+            {
+                if (SceneSwitch.storeSceneActive)
+                {
+                    Time.timeScale = 1;
+                    storeCanvas.SetActive(false);
+                    SceneSwitch.storeSceneActive = false;
+                    StarterAssetsInputs.SetCursorState(true);
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                    storeCanvas.SetActive(true);
+                    SceneSwitch.storeSceneActive = true;
+                    StarterAssetsInputs.SetCursorState(false);
+                }
+            }
+        }*/
     }
     void pickUp()
     {
@@ -254,4 +310,11 @@ public class player : MonoBehaviour
         }
 
         }
+    public static void RestartGame()
+    {
+        inventoryItems.Clear();
+        storageItems.Clear();
+        SceneManager.LoadScene(1);
+        gameoverCanvas.SetActive(false);
     }
+}
