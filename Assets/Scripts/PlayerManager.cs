@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static bool isGrappled = false;
     Animator animator;
-    public bool gameEneded = false;
+    public bool gameEneded;
     GameObject grapplerEnemy;
     public GameObject Door;
     public GameObject Door1;
@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameEneded = false;
         animator = GetComponent<Animator>();
         grapplerEnemy = null;
     }
