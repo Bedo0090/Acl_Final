@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
     public GameObject healthBarUI;
     public GameObject coinsPrefab;
 
+    public AudioSource sfx;
+
     private NavMeshAgent enemy;
     public EnemyState state;
     [SerializeField] EnemyWeaponState weaponState;
@@ -435,6 +437,7 @@ public class Enemy : MonoBehaviour
         }
         else // die
         {
+            sfx.Play();
             GetComponent<CapsuleCollider>().enabled = false;
             state = EnemyState.Dead;
             animator.SetTrigger("Die");

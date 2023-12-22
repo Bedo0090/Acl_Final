@@ -155,6 +155,16 @@ public class player : MonoBehaviour
                     }
                 }
             }
+            else if (collision.gameObject.CompareTag("WinKey"))
+            {
+                if (inventoryItems.Count < 6)
+                {
+                    itemData winKey = new itemData("WK", "Win Key", 0);
+                    inventoryItems.Add(winKey);
+                    PlayerManager.gameWin = true;
+                    PlayerManager.gameEneded = true;
+                }
+            }
         }
         /*if (Input.GetKeyDown(KeyCode.B))
         {

@@ -32,6 +32,7 @@ TagManager:
   - KeycardDoor
   - Coin
   - Store
+  - WinKey
   layers:
   - Default
   - TransparentFX

@@ -23,6 +23,8 @@ public class PlayerHealth : MonoBehaviour
     public Material emptyMat;
     public Material fullMat;
 
+    public AudioSource sfx;
+
     GameObject[] healthBar;
 
     bool invincible;
@@ -52,6 +54,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!invincible)
         {
+            sfx.Play();
             if (playerHealth > dmg)
             {
                 playerHealth -= dmg;

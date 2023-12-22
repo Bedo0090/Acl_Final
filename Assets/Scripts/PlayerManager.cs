@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     public static bool isGrappled = false;
     Animator animator;
     public static bool gameEneded;
+    public static bool gameWin;
     GameObject grapplerEnemy;
     public GameObject Door;
     public GameObject Door1;
@@ -24,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameWin = false;
         gameEneded = false;
         animator = GetComponent<Animator>();
         grapplerEnemy = null;
@@ -33,7 +35,16 @@ public class PlayerManager : MonoBehaviour
     {
         if (gameEneded == true)
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("FinalState"))
+            if (gameWin == false)
+            {
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("FinalState"))
+                {
+                    gameoverCanvas.SetActive(true);
+                    Time.timeScale = 0;
+                    StarterAssetsInputs.SetCursorState(false);
+                }
+            }
+            else
             {
                 gameoverCanvas.SetActive(true);
                 Time.timeScale = 0;

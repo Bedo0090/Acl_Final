@@ -30,5 +30,8 @@ public class mainmenu : MonoBehaviour
     public void credits() {
         SceneManager.LoadScene("credits");
     }
-
+    public void creditsAsset()
+    {
+        SceneManager.LoadScene("assetcredit");
+    }
 }
