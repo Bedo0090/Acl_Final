@@ -56,6 +56,9 @@ public class ThirdPersonAimController : MonoBehaviour
         // check what is equipped
         if (player.equippedWeapon.name.Equals("Pistol"))
         {
+            shotgunObject.SetActive(false);
+            revolverObject.SetActive(false);
+            ARObject.SetActive(false);
             //disable previous weapon
             for (int i = 3; i <= 11; i++)
             {
@@ -93,7 +96,9 @@ public class ThirdPersonAimController : MonoBehaviour
         }
         else if (player.equippedWeapon.name.Equals("Shotgun"))
         {
-
+            pistolObject.SetActive(false);
+            revolverObject.SetActive(false);
+            ARObject.SetActive(false);
             //disable previous weapon
             for (int i = 0; i <= 11; i++)
             {
@@ -132,6 +137,9 @@ public class ThirdPersonAimController : MonoBehaviour
         }
         else if (player.equippedWeapon.name.Equals("Revolver"))
         {
+            pistolObject.SetActive(false);
+            shotgunObject.SetActive(false);
+            ARObject.SetActive(false);
             //disable previous weapon
             for (int i = 0; i <= 11; i++)
             {
@@ -170,6 +178,9 @@ public class ThirdPersonAimController : MonoBehaviour
         }
         else if (player.equippedWeapon.name.Equals("Assault Rifle"))
         {
+            pistolObject.SetActive(false);
+            revolverObject.SetActive(false);
+            shotgunObject.SetActive(false);
             //disable previous weapon
             for (int i = 0; i <= 11; i++)
             {

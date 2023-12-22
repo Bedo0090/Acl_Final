@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject health6;
     public GameObject health7;
     public GameObject health8;
+    public static bool change = false;
 
     public Material emptyMat;
     public Material fullMat;
@@ -33,7 +34,14 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (change)
+        {
+            playerHealth = player.healthpoints;
+            AssignHealth();
+            change = false;
+        }
         player.healthpoints = playerHealth;
+        
     }
 
     public void TakeDmg(int dmg)

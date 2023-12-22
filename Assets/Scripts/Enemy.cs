@@ -101,6 +101,7 @@ public class Enemy : MonoBehaviour
     {
         if (state == EnemyState.Dead)
         {
+            this.GetComponent<CapsuleCollider>().enabled = false;
             return;
         }
 

@@ -68,6 +68,7 @@ public class GunSystem : MonoBehaviour
             
             if (rayHit.collider.CompareTag("Enemy"))
             {
+                rayHit.collider.GetComponent<Enemy>().TakeDmg(damage);
                 hitEffectBlood.transform.position = rayHit.point;
                 hitEffectBlood.transform.forward = rayHit.normal;
                 hitEffectBlood.Emit(1);

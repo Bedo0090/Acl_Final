@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    bool isGrappled = false;
+    public static bool isGrappled = false;
     Animator animator;
     public bool gameEneded = false;
     GameObject grapplerEnemy;

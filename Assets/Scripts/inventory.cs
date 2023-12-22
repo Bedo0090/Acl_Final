@@ -180,9 +180,15 @@ public class inventory : MonoBehaviour
         if (item.name == "Green Herb")
         {
             if ((player.healthpoints += 2) >= 8)
+            {
                 player.healthpoints = 8;
+                PlayerHealth.change = true;
+            }
             else
+            {
                 player.healthpoints += 2;
+                PlayerHealth.change = true;
+            }
         }
         else if (item.name == "Red Herb")
         {
@@ -192,9 +198,15 @@ public class inventory : MonoBehaviour
         else if (item.name == "Green + Green Mixture")
         {
             if ((player.healthpoints += 6) >= 8)
+            {
                 player.healthpoints = 8;
+                PlayerHealth.change = true;
+            }
             else
+            {
                 player.healthpoints += 6;
+                PlayerHealth.change = true;
+            }
         }
         else if (item.name == "Red + Red Mixture")
         {
@@ -203,6 +215,7 @@ public class inventory : MonoBehaviour
         else if (item.name == "Green + Red Mixture")
         {
             player.healthpoints = 8;
+            PlayerHealth.change = true;
         }
         UiInventory.rootVisualElement.Q("ItemRow").Remove(slectedSlot1.button);
         player.inventoryItems.Remove(slectedSlot1.item);
