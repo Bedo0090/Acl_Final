@@ -22,13 +22,16 @@ public class PlayerHealth : MonoBehaviour
     public Material emptyMat;
     public Material fullMat;
 
-    GameObject[] healthBar; 
+    GameObject[] healthBar;
+
+    bool invincible;
     void Start()
     {
         playerHealth = player.healthpoints;
         animator = GetComponent<Animator>();
         playerManager = GetComponent<PlayerManager>();
         healthBar = new GameObject[8] {health1, health2, health3 , health4 , health5 , health6 , health7 , health8};
+        invincible = false;
     }
 
     // Update is called once per frame
@@ -46,17 +49,20 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDmg(int dmg)
     {
-        if(playerHealth > dmg)
+        if (!invincible)
         {
-            playerHealth -= dmg;
-            animator.SetTrigger("Hit");
+            if (playerHealth > dmg)
+            {
+                playerHealth -= dmg;
+                animator.SetTrigger("Hit");
+            }
+            else
+            {
+                playerHealth = 0;
+                GameOver();
+            }
+            AssignHealth();
         }
-        else
-        {
-            playerHealth = 0;
-            GameOver();
-        }
-        AssignHealth();
     }
 
     public void GainHealth(int healthPoints) {
@@ -92,5 +98,9 @@ public class PlayerHealth : MonoBehaviour
             healthBar[i].GetComponent<MeshRenderer>().material = fullMat;
 
         }
+    }
+    public void ToggleInvincibility()
+    {
+        invincible = !invincible;
     }
 }

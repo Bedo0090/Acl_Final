@@ -59,6 +59,7 @@ public class ThirdPersonAimController : MonoBehaviour
             shotgunObject.SetActive(false);
             revolverObject.SetActive(false);
             ARObject.SetActive(false);
+            knifeObject.SetActive(false);
             //disable previous weapon
             for (int i = 3; i <= 11; i++)
             {
@@ -66,7 +67,7 @@ public class ThirdPersonAimController : MonoBehaviour
             }
 
             //check if grenade animation is true
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade") || animator.GetCurrentAnimatorStateInfo(0).IsName("Grappled"))
             {
                 for (int i = 0; i <= 2; i++)
                 {
@@ -99,6 +100,7 @@ public class ThirdPersonAimController : MonoBehaviour
             pistolObject.SetActive(false);
             revolverObject.SetActive(false);
             ARObject.SetActive(false);
+            knifeObject.SetActive(false);
             //disable previous weapon
             for (int i = 0; i <= 11; i++)
             {
@@ -107,7 +109,7 @@ public class ThirdPersonAimController : MonoBehaviour
             }
 
             //check if grenade animation is true
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade") || animator.GetCurrentAnimatorStateInfo(0).IsName("Grappled"))
             {
                 for (int i = 3; i <= 5; i++)
                 {
@@ -140,6 +142,7 @@ public class ThirdPersonAimController : MonoBehaviour
             pistolObject.SetActive(false);
             shotgunObject.SetActive(false);
             ARObject.SetActive(false);
+            knifeObject.SetActive(false);
             //disable previous weapon
             for (int i = 0; i <= 11; i++)
             {
@@ -148,7 +151,7 @@ public class ThirdPersonAimController : MonoBehaviour
             }
 
             //check if grenade animation is true
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade") || animator.GetCurrentAnimatorStateInfo(0).IsName("Grappled"))
             {
                 for (int i = 6; i <= 8; i++)
                 {
@@ -181,6 +184,7 @@ public class ThirdPersonAimController : MonoBehaviour
             pistolObject.SetActive(false);
             revolverObject.SetActive(false);
             shotgunObject.SetActive(false);
+            knifeObject.SetActive(false);
             //disable previous weapon
             for (int i = 0; i <= 11; i++)
             {
@@ -189,7 +193,7 @@ public class ThirdPersonAimController : MonoBehaviour
             }
 
             //check if grenade animation is true
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowGrenade") || animator.GetCurrentAnimatorStateInfo(0).IsName("Grappled"))
             {
                 for (int i = 9; i <= 11; i++)
                 {

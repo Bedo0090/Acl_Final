@@ -378,4 +378,36 @@ public class inventory : MonoBehaviour
         slectedSlot1 = null;
     }
 
+    public static bool addToInventory(itemData i)
+    {
+        if (player.inventoryItems.Count == 6)
+        {
+            return false;
+        }
+        if (i.type == "Ammo")
+        {
+            bool putted = false;
+            foreach (var item in player.inventoryItems)
+            {
+                if (item.name == i.name)
+                {
+                    item.number += i.number;
+                    item.s.updateSlot(item);
+                    putted = true;
+                }
+            }
+            if (!putted)
+            {
+                player.inventoryItems.Add(i);
+
+            }
+
+            return true;
+        }
+        else
+        {
+            player.inventoryItems.Add(i);
+            return true;
+        }
+    }
 }

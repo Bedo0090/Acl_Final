@@ -8,7 +8,7 @@ enum EnemyWeaponState
     Unarmed
 }
 
-enum EnemyState
+public enum EnemyState
 {
     Idle,
     Patrol,
@@ -32,9 +32,10 @@ public class Enemy : MonoBehaviour
     float health;
     public Slider healthSlider;
     public GameObject healthBarUI;
+    public GameObject coinsPrefab;
 
     private NavMeshAgent enemy;
-    [SerializeField] EnemyState state;
+    public EnemyState state;
     [SerializeField] EnemyWeaponState weaponState;
     GameObject player;
     public GameObject weapon;
@@ -44,7 +45,7 @@ public class Enemy : MonoBehaviour
 
     float timeSinceLastAttack;
 
-    bool grapplingPlayer = false;
+    public bool grapplingPlayer = false;
     float elabsedGrapplingTime;
 
     private Animator animator;
@@ -63,6 +64,8 @@ public class Enemy : MonoBehaviour
 
     //throwing weapon 
     bool decisionMade;
+
+
 
     private void Awake()
     {
@@ -101,12 +104,11 @@ public class Enemy : MonoBehaviour
     {
         if (state == EnemyState.Dead)
         {
-            this.GetComponent<CapsuleCollider>().enabled = false;
             return;
         }
 
         HandleHealth();
-
+        CheckCollision();
         if (state != EnemyState.Attack)
         {
             attackType = AttackType.None;
@@ -300,28 +302,54 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    void CheckCollision()
     {
-        if (collision.collider.CompareTag("Player"))
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
+        foreach (Collider col in colliders)
         {
-            switch (attackType)
+            if (col.gameObject.CompareTag("Player"))
             {
-                case AttackType.Grapple:
-                    Debug.Log("Grappled");
-                    grapplingPlayer = true;
-                    playerManager.SetIsGrappled(true, gameObject);
-                    attackType = AttackType.None;
-                    break;
-                case AttackType.Punch:
-                    Debug.Log("Punched");
-                    player.GetComponent<PlayerHealth>().TakeDmg(1);
-                    attackType = AttackType.None;
-                    break;
-                default: break;
+                switch (attackType)
+                {
+                    case AttackType.Grapple:
+                        Debug.Log("Grappled");
+                        grapplingPlayer = true;
+                        playerManager.SetIsGrappled(true, gameObject);
+                        attackType = AttackType.None;
+                        break;
+                    case AttackType.Punch:
+                        Debug.Log("Punched");
+                        player.GetComponent<PlayerHealth>().TakeDmg(1);
+                        attackType = AttackType.None;
+                        break;
+                    default: break;
+                }
             }
-
         }
     }
+
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.collider.CompareTag("Player"))
+    //    {
+    //        switch (attackType)
+    //        {
+    //            case AttackType.Grapple:
+    //                Debug.Log("Grappled");
+    //                grapplingPlayer = true;
+    //                playerManager.SetIsGrappled(true, gameObject);
+    //                attackType = AttackType.None;
+    //                break;
+    //            case AttackType.Punch:
+    //                Debug.Log("Punched");
+    //                player.GetComponent<PlayerHealth>().TakeDmg(1);
+    //                attackType = AttackType.None;
+    //                break;
+    //            default: break;
+    //        }
+
+    //    }
+    //}
 
     void Punch()
     {
@@ -407,11 +435,15 @@ public class Enemy : MonoBehaviour
         }
         else // die
         {
+            GetComponent<CapsuleCollider>().enabled = false;
             state = EnemyState.Dead;
             animator.SetTrigger("Die");
             healthBarUI.SetActive(false);
             // drop a random amount of coins from 5 to 50
             droppedCoins = Random.Range(5, 51);
+            Vector3 coinsPosition = transform.position + new Vector3(0, 0.5f, 0);
+            GameObject coinsObject =  Instantiate(coinsPrefab, coinsPosition, transform.rotation);
+            coinsObject.GetComponent<CoinsObject>().amount = droppedCoins;
         }
     }
 
